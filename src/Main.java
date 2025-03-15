@@ -23,6 +23,7 @@ class TreeNode {
 
     // Constructor initializes a new node with the given word
     public TreeNode(String word) {
+        word = word.toLowerCase();
         // (1) Assigns the input word to the node
         // (2) New word starts with frequency of 1
         // (3) Initially, no children
