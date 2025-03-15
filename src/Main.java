@@ -17,7 +17,7 @@ import java.util.*; // Import for utility classes like Scanner
 // TODO #1
 // Represents a node in the Binary Search Tree (BST)
 class TreeNode {
-    // (1) The word stored in this node
+    // (1) The word stored in th  is node
     // (2) Count of occurrences of the word
     // (3) Pointers to left and right children
 
