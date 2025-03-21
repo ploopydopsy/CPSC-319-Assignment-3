@@ -170,9 +170,23 @@ class BinarySearchTree {
     // Helper function to recursively search for a word in the BST
     private int searchWordRecursive(TreeNode node, String word) {
         // (1) Base case: If node is null, the word is not in the BST
-        // (2) If word matches current node, return its frequency
-        // (3) If word is smaller, search left subtree
-        // (4) If word is larger, search right subtree
+        if (node == null) {
+            return 0;
+        }
+
+        int compare = word.compareTo(node.word);
+        // If word matches current node, return its frequency
+
+        if (compare < 0) {
+            // If word is smaller, search left subtree
+            return searchWordRecursive(node.left, word);
+        }
+
+        else if (compare > 0) {
+            // If word is larger, search right subtree
+            return searchWordRecursive(node.right, word);
+        }
+        return node.count;
     }
 }
 
