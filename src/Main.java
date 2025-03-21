@@ -135,8 +135,13 @@ class BinarySearchTree {
     // TODO #11
     // Returns the most frequent word along with its occurrence count
     public String getMostFrequentWord() {
-        // (1) Retrieve the word stored in mostFrequentNode
-        // (2) Append the frequency count in the format "word (X times)"
+        // Retrieve the word stored in mostFrequentNode
+        // If there is no word stored return message
+        if (mostFrequentNode == null) {
+            return "ERROR MESSAGE : No most frequent word found.";
+        }
+        // Append the frequency count in the format "word (X times)"
+        return mostFrequentNode.word + " (" + mostFrequentNode.count + " times)";
     }
 
     // TODO #12
