@@ -154,10 +154,19 @@ class BinarySearchTree {
         // - An empty tree has height -1 (since there are no edges).
         // - A tree with a single node has height 0.
 
-        // (1) Base case: If the tree is empty (null node), return height -1.
-        // (2) Get the height of the left subtree.
-        // (3) Get the height of the right subtree.
-        // (4) Return the maximum height between left and right subtrees + 1.
+        // Base case: If the tree is empty (null node), return height -1.
+        if (node == null) {
+            return -1;
+        }
+
+        // Get the height of the left subtree.
+        int leftHeight = getHeight(node.left);
+
+        // Get the height of the right subtree.
+        int rightHeight = getHeight(node.right);
+
+        // Return the maximum height between left and right subtrees + 1.
+        return Math.max(leftHeight, rightHeight) + 1; /// Google used to find this function
     }
 
     // TODO #14
