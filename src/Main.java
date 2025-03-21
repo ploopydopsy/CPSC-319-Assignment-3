@@ -40,11 +40,14 @@ class TreeNode {
 
 // Binary Search Tree implementation for storing and analyzing words
 class BinarySearchTree {
-    // (1) Root of the BST
-
-    // (2) Total words inserted (including duplicates)
-    // (3) Count of unique words
-    // (4) Stores the node with the highest frequency
+    // Root of the BST
+    private TreeNode root = null;
+    // Total words inserted (including duplicates)
+    private int totalWords = 0;
+    // Count of unique words
+    private int uniqueWordCount = 0;
+    // Stores the node with the highest frequency
+    private TreeNode mostFrequentNode = null;
 
     // Inserts a word into the Binary Search Tree (BST)
     public void insert(String word) {
