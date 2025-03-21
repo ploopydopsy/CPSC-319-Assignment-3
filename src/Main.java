@@ -95,9 +95,21 @@ class BinarySearchTree {
     // Performs pre-order traversal (Root, Left, Right)
     private void traversePreOrder(TreeNode node, StringBuilder result) {
         // (1) Check if the current node is not null before processing
-        // (2) Append the current node's word to the result (Root)
-        // (3) Recursively traverse the left subtree (Left)
-        // (4) Recursively traverse the right subtree (Right)
+        if (node != null) {
+            // (2) Append the current node's word to the result (Root)
+            /// not sure
+            if (!result.isEmpty()) {
+                result.append(", ");
+            }
+            result.append(node.word);
+
+            // Recursively traverse the left subtree (Left)
+            traversePreOrder(node.left, result);
+
+            // Recursively traverse the right subtree (Right)
+            traversePreOrder(node.right, result);
+        }
+
     }
 
     // TODO #7
