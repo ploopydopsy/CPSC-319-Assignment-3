@@ -42,47 +42,87 @@ class TreeNode {
 class BinarySearchTree {
     // Root of the BST
     private TreeNode root = null;
+
     // Total words inserted (including duplicates)
-    private int totalWords = 0;
+    private int wordCount = 0;
+
     // Count of unique words
-    private int uniqueWordCount = 0;
+    private int uniqueCount = 0;
+
     // Stores the node with the highest frequency
     private TreeNode mostFrequentNode = null;
 
     // Inserts a word into the Binary Search Tree (BST)
     public void insert(String word) {
-        // (1) Calls the recursive function to insert the word, starting from the root node
+        // Calls the recursive function to insert the word, starting from the root node
+        root = insertRecursive(root, word);
     }
 
-    // TODO #3
+
     // Helper function to recursively insert a word into the BST
     private TreeNode insertRecursive(TreeNode node, String word) {
         // **BST Property**: Smaller words go to the left subtree, larger words go to the right.
 
-        // (1) If the current node is null, insert a new node with the word
-        // (2) Increase the unique word count
-        // (3) Return the updated node
+        // If the current node is null, insert a new node with the word.
+        if (node == null) {
+            // Increase the unique word count
+            wordCount++;
+            uniqueCount++;
+            TreeNode newNode = new TreeNode(word);
 
-        // (4) If word is smaller, insert into left subtree
-        // (5) Else if word is larger, insert into right subtree
-        // (6) Else the word already exists, so increase its frequency
+            if (mostFrequentNode == null || newNode.count > mostFrequentNode.count) {
+                mostFrequentNode = newNode;
+            }
+            // Return the updated node
+            return newNode;
+        }
 
-        // (7) Update most frequent word tracking
-        // (8) Return the updated node
+        int compare = word.compareTo(node.word);
+        // If word is smaller, insert into left subtree
+        if (compare < 0) {
+            node.left = insertRecursive(node.left, word);
+        }
+        // Else if word is larger, insert into right subtree
+        else if (compare > 0) {
+            node.right = insertRecursive(node.right, word);
+        }
+        // Else the word already exists, so increase its frequency
+        else {
+            node.count++;
+            wordCount++;
+        }
+
+        // Update most frequent word tracking
+        if (mostFrequentNode == null || mostFrequentNode.count > mostFrequentNode.count) {
+            mostFrequentNode = node;
+        }
+        // Return the updated node
+        return node;
     }
 
-    // TODO #4
     // Returns the traversal output as a string based on the selected traversal type
     public String getTraversalOutput(int type) {
-        // (1) Creates a StringBuilder to store the traversal result
-        // (2) Checks the value of 'type' to determine which traversal to perform
-        // (3) If type is 1, perform in-order traversal
-        // (4) If type is 2, perform pre-order traversal
-        // (5) If type is 3, perform post-order traversal
-        // (6) If input is invalid, return an error message
+        // Creates a StringBuilder to store the traversal result
+        StringBuilder result = new StringBuilder();
+
+        // Checks the value of 'type' to determine which traversal to perform
+        if (type == 1) {
+            // If type is 1, perform in-order traversal
+            traverseInOrder(root, result);
+        } else if (type == 2) {
+            // If type is 2, perform pre-order traversal
+            traversePreOrder(root, result);
+        } else if (type == 3) {
+            // If type is 3, perform post-order traversal
+            traversePostOrder(root, result);
+        } else {
+            // If input is invalid, return an error message
+            return "ERROR MESSAGE : Input is invalid.";
+        }
+        return result.toString();
     }
 
-    // TODO #5
+    // TODO
     // Performs in-order traversal (Left, Root, Right)
     private void traverseInOrder(TreeNode node, StringBuilder result) {
         // Check if the current node is not null before processing
@@ -100,7 +140,6 @@ class BinarySearchTree {
         }
     }
 
-    // TODO #6
     // Performs pre-order traversal (Root, Left, Right)
     private void traversePreOrder(TreeNode node, StringBuilder result) {
         // (1) Check if the current node is not null before processing
@@ -121,7 +160,6 @@ class BinarySearchTree {
 
     }
 
-    // TODO #7
     // Performs post-order traversal (Left, Right, Root)
     private void traversePostOrder(TreeNode node, StringBuilder result) {
         // (1) Check if the current node is not null before processing
@@ -139,15 +177,19 @@ class BinarySearchTree {
         }
     }
 
-    // TODO #8
+
     // Computes and returns the total number of words in the BST, including duplicates
-    public int getTotalWords() {
-        // (1) Reset the total word count to 0 before recalculating
-        // (2) Call the helper function to count word occurrences
-        // (3) Return the computed total number of words
+    public int getWordCount() {
+        // Reset the total word count to 0 before recalculating
+        int oldWordCount = wordCount;
+        wordCount = 0;
+        // Call the helper function to count word occurrences
+        countWords(root);
+        // Return the computed total number of words
+        return wordCount;
     }
 
-    // TODO #9
+
     // Helper function to count words recursively in the BST
     private void countWords(TreeNode node) {
         // Check if the current node is not null before processing
@@ -161,13 +203,12 @@ class BinarySearchTree {
         }
     }
 
-    // TODO #10
     // Returns the count of unique words stored in the BST
     public int getUniqueWords() {
-        // (1) Return the total number of unique words
+        // Return the total number of unique words
+        return uniqueCount;
     }
 
-    // TODO #11
     // Returns the most frequent word along with its occurrence count
     public String getMostFrequentWord() {
         // Retrieve the word stored in mostFrequentNode
@@ -179,16 +220,16 @@ class BinarySearchTree {
         return mostFrequentNode.word + " (" + mostFrequentNode.count + " times)";
     }
 
-    // TODO #12
     // Computes and returns the height of the BST
     public int getTreeHeight() {
-        // (1) Calls the helper function getHeight() starting from the root
+        // Calls the helper function getHeight() starting from the root
+        return getHeight(root);
+
     }
 
-    // TODO #13
     // Helper function to calculate the height of the BST recursively
     private int getHeight(TreeNode node) {
-        // **Clarification**: Height is measured in edges, not nodes.
+        // ** Clarification**: Height is measured in edges, not nodes.
         // ** As per lecture slides: 'Trees - (3) Binary (Part 1) - Levels & Heights'
         // This means:
         // - An empty tree has height -1 (since there are no edges).
@@ -209,13 +250,14 @@ class BinarySearchTree {
         return Math.max(leftHeight, rightHeight) + 1; /// Google used to find this function
     }
 
-    // TODO #14
+
     // Searches for a word in the BST and returns its frequency
     public int searchWord(String word) {
-        // (1) Calls the recursive helper function, starting from the root
+        // Calls the recursive helper function, starting from the root
+        return searchWordRecursive(root, word.toLowerCase());
     }
 
-    // TODO #15
+
     // Helper function to recursively search for a word in the BST
     private int searchWordRecursive(TreeNode node, String word) {
         // (1) Base case: If node is null, the word is not in the BST
@@ -263,7 +305,7 @@ public class Main {
         }
 
         // Display statistics
-        System.out.println("Total words: " + bst.getTotalWords());
+        System.out.println("Total words: " + bst.getWordCount());
         System.out.println("Unique words: " + bst.getUniqueWords());
         System.out.println("Most frequent word: " + bst.getMostFrequentWord());
         System.out.println("Tree height: " + bst.getTreeHeight());
