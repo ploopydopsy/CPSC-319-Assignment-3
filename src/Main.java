@@ -120,10 +120,15 @@ class BinarySearchTree {
     // TODO #9
     // Helper function to count words recursively in the BST
     private void countWords(TreeNode node) {
-        // (1) Check if the current node is not null before processing
-        // (2) Add the frequency of the current node's word to the total count
-        // (3) Recursively traverse left subtree
-        // (4) Recursively traverse right subtree
+        // Check if the current node is not null before processing
+        if (node != null) {
+            // Add the frequency of the current node's word to the total count
+            wordCount += node.count;
+            // Recursively traverse left subtree
+            countWords(node.left);
+            // Recursively traverse right subtree
+            countWords(node.right);
+        }
     }
 
     // TODO #10
