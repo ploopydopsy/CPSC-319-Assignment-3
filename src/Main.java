@@ -14,26 +14,34 @@
 import java.io.*;  // Import for file handling
 import java.util.*; // Import for utility classes like Scanner
 
-// TODO #1
+
 // Represents a node in the Binary Search Tree (BST)
 class TreeNode {
-    // (1) The word stored in th  is node
-    // (2) Count of occurrences of the word
-    // (3) Pointers to left and right children
+    // Data stored in a string
+    String word;
+    // Count of occurrences of the word
+    int count;
+    // Pointers to left and right children
+    TreeNode left;
+    TreeNode right;
 
     // Constructor initializes a new node with the given word
     public TreeNode(String word) {
-        word = word.toLowerCase();
-        // (1) Assigns the input word to the node
-        // (2) New word starts with frequency of 1
-        // (3) Initially, no children
+        // Assign the input word to the node
+        this.word = word.toLowerCase();
+        // New word starts with frequency of 1
+        this.count = 1;
+        // No children
+        this.left = null;
+        this.right = null;
     }
 }
 
-// TODO #2
+
 // Binary Search Tree implementation for storing and analyzing words
 class BinarySearchTree {
     // (1) Root of the BST
+
     // (2) Total words inserted (including duplicates)
     // (3) Count of unique words
     // (4) Stores the node with the highest frequency
