@@ -93,9 +93,11 @@ class BinarySearchTree {
         }
 
         // Update most frequent node if current node's count is higher
+        // AI helped debug this if logic
         if (mostFrequentNode == null || node.count > mostFrequentNode.count) {
             mostFrequentNode = node;
         }
+
         // Return the updated node
         return node;
     }
@@ -260,24 +262,27 @@ class BinarySearchTree {
 
     // Helper function to recursively search for a word in the BST
     private int searchWordRecursive(TreeNode node, String word) {
-        // (1) Base case: If node is null, the word is not in the BST
+        // Base case: If node is null, the word is not in the BST
         if (node == null) {
             return 0;
         }
 
         int compare = word.compareTo(node.word);
-        // If word matches current node, return its frequency
 
         if (compare < 0) {
-            // If word is smaller, search left subtree
+            // If word is smaller than current node, search left subtree
             return searchWordRecursive(node.left, word);
         }
 
         else if (compare > 0) {
-            // If word is larger, search right subtree
+            // If word is larger than current node, search right subtree
             return searchWordRecursive(node.right, word);
         }
-        return node.count;
+
+        // else word matches current node, return its frequency
+        else {
+            return node.count;
+        }
     }
 }
 
