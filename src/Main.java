@@ -92,8 +92,8 @@ class BinarySearchTree {
             wordCount++;
         }
 
-        // Update most frequent word tracking
-        if (mostFrequentNode == null || mostFrequentNode.count > mostFrequentNode.count) {
+        // Update most frequent node if current node's count is higher
+        if (mostFrequentNode == null || node.count > mostFrequentNode.count) {
             mostFrequentNode = node;
         }
         // Return the updated node
