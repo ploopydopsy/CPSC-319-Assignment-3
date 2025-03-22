@@ -10,12 +10,19 @@
 // ** Tutorial Section: T06
 //
 // ====================================================================
+// ====================================================================
+// AI tools and Google were used to help debug the frequency tracking logic,
+// explain BST height calculation, and to confirm search logic behavior.
+// AI was also used to confirm this assignment meets all requirements on the rubric
+// All code was implemented by me
+// ====================================================================
 
 import java.io.*;  // Import for file handling
 import java.util.*; // Import for utility classes like Scanner
 
 
 // Represents a node in the Binary Search Tree (BST)
+// Youtube videos, AI and lecture slides used to explain BSTs
 class TreeNode {
     // Data stored in a string
     String word;
@@ -44,10 +51,10 @@ class BinarySearchTree {
     private TreeNode root = null;
 
     // Total words inserted (including duplicates)
-    private int wordCount = 0;
+    private long wordCount = 0;
 
     // Count of unique words
-    private int uniqueCount = 0;
+    private long uniqueCount = 0;
 
     // Stores the node with the highest frequency
     private TreeNode mostFrequentNode = null;
@@ -93,7 +100,7 @@ class BinarySearchTree {
         }
 
         // Update most frequent node if current node's count is higher
-        // AI helped debug this if logic
+        // AI helped debug this if logic and explain why my original test was wrong
         if (mostFrequentNode == null || node.count > mostFrequentNode.count) {
             mostFrequentNode = node;
         }
@@ -131,7 +138,6 @@ class BinarySearchTree {
             // Recursively traverse the left subtree (Left)
             traverseInOrder(node.left, result);
             // Append the current node's word to the result (Root)
-
             if (!result.isEmpty()) {
                 result.append(", ");
             }
@@ -143,10 +149,9 @@ class BinarySearchTree {
 
     // Performs pre-order traversal (Root, Left, Right)
     private void traversePreOrder(TreeNode node, StringBuilder result) {
-        // (1) Check if the current node is not null before processing
+        // Check if the current node is not null before processing
         if (node != null) {
-            // (2) Append the current node's word to the result (Root)
-
+            // Append the current node's word to the result (Root)
             if (!result.isEmpty()) {
                 result.append(", ");
             }
@@ -158,19 +163,17 @@ class BinarySearchTree {
             // Recursively traverse the right subtree (Right)
             traversePreOrder(node.right, result);
         }
-
     }
 
     // Performs post-order traversal (Left, Right, Root)
     private void traversePostOrder(TreeNode node, StringBuilder result) {
-        // (1) Check if the current node is not null before processing
+        // Check if the current node is not null before processing
         if (node != null) {
             // Recursively traverse the left subtree (Left)
             traversePostOrder(node.left, result);
-            // (3) Recursively traverse the right subtree (Right)
+            // Recursively traverse the right subtree (Right)
             traversePostOrder(node.right, result);
-            // (4) Append the current node's word to the result (Root)
-
+            // Append the current node's word to the result (Root)
             if (!result.isEmpty()) {
                 result.append(", ");
             }
@@ -180,9 +183,9 @@ class BinarySearchTree {
 
 
     // Computes and returns the total number of words in the BST, including duplicates
-    public int getWordCount() {
+    public long getTotalWords() {
         // Reset the total word count to 0 before recalculating
-        int oldWordCount = wordCount;
+        long oldWordCount = wordCount;
         wordCount = 0;
         // Call the helper function to count word occurrences
         countWords(root);
@@ -205,7 +208,7 @@ class BinarySearchTree {
     }
 
     // Returns the count of unique words stored in the BST
-    public int getUniqueWords() {
+    public long getUniqueWords() {
         // Return the total number of unique words
         return uniqueCount;
     }
@@ -225,7 +228,6 @@ class BinarySearchTree {
     public int getTreeHeight() {
         // Calls the helper function getHeight() starting from the root
         return getHeight(root);
-
     }
 
     // Helper function to calculate the height of the BST recursively
@@ -278,7 +280,8 @@ class BinarySearchTree {
             return searchWordRecursive(node.right, word);
         }
 
-        // else word matches current node, return its frequency
+        // Else word matches current node, return its frequency
+        // AI helped implement the correct return of frequency and explained why my original implementation was wrong
         else {
             return node.count;
         }
@@ -309,7 +312,7 @@ public class Main {
         }
 
         // Display statistics
-        System.out.println("Total words: " + bst.getWordCount());
+        System.out.println("Total words: " + bst.getTotalWords());
         System.out.println("Unique words: " + bst.getUniqueWords());
         System.out.println("Most frequent word: " + bst.getMostFrequentWord());
         System.out.println("Tree height: " + bst.getTreeHeight());
